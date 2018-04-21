@@ -195,7 +195,8 @@ function getParallelipidedDiagonal(a, b, c)
  */
 function roundToPowerOfTen(num, pow) 
 {
-    throw new Error('Not implemented');
+    let a=Math.round(num/Math.pow(10,pow));
+    return a*Math.pow(10,pow);
 }
 
 /**
@@ -248,7 +249,8 @@ function toNumber(value, def)
     if ( isNaN(a))
     {
     return def;
-    } else 
+    } 
+    else 
     return a;
 }
 
