@@ -71,8 +71,9 @@ function getStringFromTemplate(firstName, lastName)
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+function extractNameFromTemplate(value) 
+{
+    return value.slice(7, value.length-1);
 }
 
 
@@ -86,8 +87,9 @@ function extractNameFromTemplate(value) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(value) {
-    throw new Error('Not implemented');
+function getFirstChar(value) 
+{
+    return value[0];
 }
 
 /**
@@ -101,8 +103,9 @@ function getFirstChar(value) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) 
+{
+    return value.trim();
 }
 
 /**
@@ -116,8 +119,9 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(value, count) {
-    throw new Error('Not implemented');
+function repeatString(value, count) 
+{
+    return value.repeat(count);
 }
 
 /**
@@ -132,8 +136,9 @@ function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) 
+{
+    return str.replace(value, '');
 }
 
 /**
@@ -147,8 +152,9 @@ function removeFirstOccurrences(str, value) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(str) {
-    throw new Error('Not implemented');
+function unbracketTag(str) 
+{
+    return str.substring(str.indexOf('<')+1, str.lastIndexOf('>'));
 }
 
 
@@ -162,8 +168,9 @@ function unbracketTag(str) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+function convertToUpperCase(str) 
+{
+    return str.toUpperCase();
 }
 
 /**
@@ -176,8 +183,9 @@ function convertToUpperCase(str) {
  *   'angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com' => ['angus.young@gmail.com', 'brian.johnson@hotmail.com', 'bon.scott@yahoo.com']
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(str) {
-    throw new Error('Not implemented');
+function extractEmails(str) 
+{
+    return str.split(';');
 }
 
 /**
@@ -203,8 +211,30 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+function getRectangleString(width, height) 
+{
+    let graph = '┌';
+    for (var i = 0; i < width-2; i++) 
+    {
+        graph += '─';
+    }
+    graph += '┐\n';
+    for (var i = 0; i < height-2; i++) 
+    {
+        graph += '│';
+        for (var j = 0; j < width-2; j++) 
+        {
+            graph += ' ';
+        }
+        graph += '│\n';
+    }
+    graph += '└';
+    for (var i = 0; i < width-2; i++) 
+    {
+        graph += '─';
+    }
+    graph += '┘\n';
+    return graph;
 }
 
 
@@ -223,8 +253,26 @@ function getRectangleString(width, height) {
  *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(str) {
-    throw new Error('Not implemented');
+function encodeToRot13(str) 
+{
+    let alfphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let alfphabet2 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+    let str_new = '';
+    let num = 0;
+
+    for (var i = 0; i < str.length; i++) 
+    {
+        num = alfphabet1.indexOf(str[i]);
+        if (num == -1)
+        {
+           str_new += str[i];
+        }
+        else
+        {
+           str_new += alfphabet2.charAt(num); 
+        }
+    }
+    return str_new;
 }
 
 /**
@@ -240,8 +288,16 @@ function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(value) {
-    throw new Error('Not implemented');
+function isString(value) 
+{
+    if (typeof value === 'string' || value instanceof String)
+    {
+        return true;
+    }
+    else
+    {
+        return false
+    }
 }
 
 
@@ -269,8 +325,55 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(value) {
-    throw new Error('Not implemented');
+function getCardId(value) 
+{
+    let temp = 0;
+    let check = false;
+    if (value[0] == 'A')
+    {
+        temp = 1;
+        check = true;
+    }
+    if (value[0] == 'J')
+    {
+        temp = 11;
+        check = true;
+    }
+    if (value[0] == 'Q')
+    {
+        temp = 12;
+        check = true;
+    }
+    if (value[0] == 'K')
+    {
+        temp = 13;
+        check = true;
+    }
+    if (!check)
+    {
+        temp = +value[0];
+        if (temp == 1)
+        {
+            temp = 10;
+        }
+    }
+    if (value.indexOf('♣') != -1) 
+    {
+       return temp-1;
+    }
+    if (value.indexOf('♦') != -1) 
+    {
+       return temp+12;
+    }
+    if (value.indexOf('♥') != -1)
+    {
+       return temp+25;
+    }
+    if (value.indexOf('♠') != -1) 
+    {
+       return temp+38;
+    }
+
 }
 
 
